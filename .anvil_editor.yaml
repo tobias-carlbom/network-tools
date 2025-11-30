@@ -2,7 +2,11 @@ unique_ids:
   assets:
     standard-page.html: VWI7Z7NQR5HKUKO2YBSAHAKNFJLNRHI7
     theme.css: KS5FZ4G32LHFOFJ2Z7QPTH2BKJZMV5OC
-  forms: {}
+  forms:
+    Form1: '1764536685840707525444592.2932'
+    Form2: '1764536776268308579991938.78'
   modules: {}
   scripts: {}
-  server_modules: {}
+  server_modules:
+    ServerModule1: '1764536695808704177314926.9364'
+    ServerModule2: '176453704252765516240136.343605'
