@@ -1,4 +1,5 @@
 :root[data-theme="dark"] {
+    /*
     color-scheme: dark;
 
     --pico-background-color: #020617;
@@ -19,9 +20,10 @@
     --pico-secondary: #a1a1aa;
     --pico-secondary-background: #f7931a;
     --pico-secondary-border: var(--pico-secondary-background);
-    --pico-secondary-hover: #e4e4e7;
-    --pico-secondary-hover-background: #475569;
-    --pico-secondary-hover-border: var(--pico-secondary-hover-background);
+
+    --pico-secondary-hover-background: var(--pico-secondary-background);
+    --pico-secondary-hover-border: var(--pico-secondary-background);
+
     --pico-secondary-focus: rgba(148, 163, 184, 0.25);
     --pico-secondary-inverse: #0b0f19;
 
@@ -29,8 +31,37 @@
     --pico-form-element-border-color: #1f2937;
     --pico-form-element-active-border-color: var(--pico-primary-border);
     --pico-form-element-focus-color: var(--pico-primary-focus);
+    */
+
+    /*--pico-text-selection-color: rgba(247, 147, 26, 0.35);*/
 }
 
+::selection {
+    background-color: var(--pico-primary);
+    color: var(--pico-primary-inverse);
+}
+
+header.container nav strong {
+    color: var(--pico-primary);
+}
+
+mark {
+    background-color: var(--pico-primary);
+    color: var(--pico-primary-inverse);
+}
+
+@media (min-width: 950px) {
+    :root {
+        --pico-font-size: 20px;
+        --pico-line-height: 1.5;
+        --pico-font-size-h1: 2rem;
+        --pico-font-size-h2: 1.5rem;
+        --pico-font-size-h3: 1.25rem;
+    }
+    .container {
+        max-width: 950px;
+    }
+}
 
 body {
     font-size: var(--pico-font-size) !important;

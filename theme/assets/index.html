@@ -1,12 +1,38 @@
-<header class="container-fluid">
+<header class="container">
     <nav>
         <ul>
-            <li><strong>Network toolbox</strong></li>
+            <li><strong>Carlboms Data Network Tools</strong></li>
         </ul>
         <ul>
             <li>
-                <button id="toggle-theme" class="secondary outline" type="button">
-                    Theme
+                <button
+                    id="toggle-theme"
+                    class="outline"
+                    type="button"
+                    aria-label="Toggle theme"
+                    style="border:none; box-shadow:none; outline:none; background:none; padding:0;"
+                    >
+                    <span id="icon-sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+                            <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="2"></line>
+                            <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" stroke-width="2"></line>
+                            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" stroke="currentColor" stroke-width="2"></line>
+                            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"></line>
+                            <line x1="2" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="2"></line>
+                            <line x1="19" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2"></line>
+                            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" stroke="currentColor" stroke-width="2"></line>
+                            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"></line>
+                        </svg>
+                    </span>
+                    <span id="icon-moon" aria-hidden="true" hidden>
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path
+                                d="M21 12.79A9 9 0 0 1 12.21 3 7 7 0 1 0 21 12.79z"
+                                fill="currentColor"
+                                ></path>
+                        </svg>
+                    </span>
                 </button>
             </li>
         </ul>
@@ -15,9 +41,9 @@
 
 <main class="container">
     <section>
-        <h1>Network diagnostics</h1>
+        <h1>Network Toolbox</h1>
         <p>
-            Run server-side checks to verify TCP ports and DNS A records for your services.
+            Run server-side checks to verify TCP ports and DNS Probagation for your services. This tool is privacy-focused and no data will be stored.
         </p>
     </section>
 
@@ -25,12 +51,12 @@
         <nav aria-label="Tool selection">
             <ul>
                 <li>
-                    <button id="tab-port" type="button" class="secondary">
+                    <button id="tab-port" type="button" class="primary">
                         Port Check
                     </button>
                 </li>
                 <li>
-                    <button id="tab-dns" type="button" class="secondary outline">
+                    <button id="tab-dns" type="button" class="primary outline">
                         DNS Probagation
                     </button>
                 </li>
@@ -65,7 +91,7 @@
 
                 <button
                     anvil-name="port_check_button"
-                    type="button"
+                    type="submit"
                     >
                     Run port check
                 </button>
@@ -111,7 +137,7 @@
 
                 <button
                     anvil-name="dns_check_button"
-                    type="button"
+                    type="submit"
                     >
                     Run DNS check
                 </button>
@@ -145,9 +171,10 @@
     </section>
 </main>
 
-<footer class="container-fluid">
+<footer class="container">
     <small>
         Built with <a href="https://picocss.com" target="_blank">Pico CSS</a>
+        and <a href="https://anvil.works" target="_blank">Anvil.Works</a>
     </small>
 </footer>
 
@@ -158,10 +185,28 @@
     const tabDns = document.getElementById("tab-dns");
     const toolPort = document.getElementById("tool-port");
     const toolDns = document.getElementById("tool-dns");
+    const iconSun = document.getElementById("icon-sun");
+    const iconMoon = document.getElementById("icon-moon");
+
+    function applyThemeIcon(theme) {
+        if (!iconSun || !iconMoon) return;
+        if (theme === "dark") {
+            iconSun.hidden = true;
+            iconMoon.hidden = false;
+        } else {
+            iconSun.hidden = false;
+            iconMoon.hidden = true;
+        }
+    }
 
     const storedTheme = window.localStorage.getItem("nt_theme");
     if (storedTheme === "light" || storedTheme === "dark") {
         root.setAttribute("data-theme", storedTheme);
+        applyThemeIcon(storedTheme);
+    } else {
+        const initial = root.getAttribute("data-theme") || "light";
+        root.setAttribute("data-theme", initial);
+        applyThemeIcon(initial);
     }
 
     if (btnTheme) {
@@ -170,6 +215,7 @@
             const next = current === "light" ? "dark" : "light";
             root.setAttribute("data-theme", next);
             window.localStorage.setItem("nt_theme", next);
+            applyThemeIcon(next);
         });
     }
 
@@ -192,3 +238,4 @@
         tabDns.addEventListener("click", showDns);
     }
 </script>
+

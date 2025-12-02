@@ -15,6 +15,21 @@ class MainView(MainViewTemplate):
             "click", self._on_dns_check_click
         )
 
+        self.dom_nodes["port_form"].addEventListener(
+            "submit", self._on_port_form_submit
+        )
+        self.dom_nodes["dns_form"].addEventListener(
+            "submit", self._on_dns_form_submit
+        )
+
+    def _on_port_form_submit(self, event):
+        event.preventDefault()
+        self._on_port_check_click(event)
+
+    def _on_dns_form_submit(self, event):
+        event.preventDefault()
+        self._on_dns_check_click(event)
+
     def _on_port_check_click(self, event):
         host = (self.dom_nodes["port_host_input"].value or "").strip()
         if not host:
@@ -25,13 +40,16 @@ class MainView(MainViewTemplate):
         except (TypeError, ValueError):
             return
 
+        btn = self.dom_nodes["port_check_button"]
+        btn.setAttribute("aria-busy", "true")
+        btn.disabled = True
+
         try:
-            res = anvil.server.call("check_port", host, port)
-        except Exception as e:
+            res = anvil.server.call_s("check_port", host, port)
+        except Exception:
             self.dom_nodes["port_result_message"].textContent = f"{host}:{port}"
             self.dom_nodes["port_resolved_ip_text"].textContent = "–"
             self.dom_nodes["port_status_text"].textContent = "error"
-            self.dom_nodes["port_error_text"].textContent = str(e)
         else:
             self.dom_nodes["port_result_message"].textContent = (
                 f"{res['host']}:{res['port']}"
@@ -40,7 +58,9 @@ class MainView(MainViewTemplate):
                 res["resolved_ip"] or "–"
             )
             self.dom_nodes["port_status_text"].textContent = res["status"]
-            #self.dom_nodes["port_error_text"].textContent = res["error"] or "None"
+        finally:
+            btn.removeAttribute("aria-busy")
+            btn.disabled = False
 
         anvil.js.window.document.getElementById("port-result-section").hidden = False
 
@@ -49,8 +69,12 @@ class MainView(MainViewTemplate):
         if not target:
             return
 
+        btn = self.dom_nodes["dns_check_button"]
+        btn.setAttribute("aria-busy", "true")
+        btn.disabled = True
+
         try:
-            data = anvil.server.call("dns_a_propagation", target)
+            data = anvil.server.call_s("dns_propagation", target)
         except Exception as e:
             self.dom_nodes["dns_summary_text"].textContent = ""
             self.dom_nodes["dns_error_text"].textContent = str(e)
@@ -61,6 +85,9 @@ class MainView(MainViewTemplate):
             )
             self.dom_nodes["dns_error_text"].textContent = ""
             self._render_dns_rows(data["results"])
+        finally:
+            btn.removeAttribute("aria-busy")
+            btn.disabled = False
 
         anvil.js.window.document.getElementById("dns-result-section").hidden = False
 
@@ -74,10 +101,18 @@ class MainView(MainViewTemplate):
         for r in results:
             tr = doc.createElement("tr")
 
+            ips = r.get("ips") or []
+            ip_cell_text = ", ".join(ips) if ips else "–"
+            ttl_text = str(r["ttl"]) if r["ttl"] is not None else "–"
+            resolver_label = r["resolver_name"]
+            country = r.get("country")
+            if country:
+                resolver_label = f"{resolver_label} ({country})"
+
             vals = [
-                r["resolver_name"],
-                ", ".join(r["ips"]) if r["ips"] else "–",
-                str(r["ttl"]) if r["ttl"] is not None else "–",
+                resolver_label,
+                ip_cell_text,
+                ttl_text,
                 r["status"],
             ]
 
