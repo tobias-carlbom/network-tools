@@ -1,0 +1,194 @@
+<header class="container-fluid">
+    <nav>
+        <ul>
+            <li><strong>Network toolbox</strong></li>
+        </ul>
+        <ul>
+            <li>
+                <button id="toggle-theme" class="secondary outline" type="button">
+                    Theme
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container">
+    <section>
+        <h1>Network diagnostics</h1>
+        <p>
+            Run server-side checks to verify TCP ports and DNS A records for your services.
+        </p>
+    </section>
+
+    <section>
+        <nav aria-label="Tool selection">
+            <ul>
+                <li>
+                    <button id="tab-port" type="button" class="secondary">
+                        Port Check
+                    </button>
+                </li>
+                <li>
+                    <button id="tab-dns" type="button" class="secondary outline">
+                        DNS Probagation
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </section>
+
+    <section id="tool-port">
+        <article>
+            <form anvil-name="port_form">
+                <label>
+                    Hostname or IP
+                    <input
+                        anvil-name="port_host_input"
+                        type="text"
+                        placeholder="api.example.com"
+                        required
+                        />
+                </label>
+
+                <label>
+                    Port
+                    <input
+                        anvil-name="port_port_input"
+                        type="number"
+                        min="1"
+                        max="65535"
+                        value="443"
+                        required
+                        />
+                </label>
+
+                <button
+                    anvil-name="port_check_button"
+                    type="button"
+                    >
+                    Run port check
+                </button>
+            </form>
+
+            <section
+                id="port-result-section"
+                aria-label="Port check result"
+                hidden
+                >
+                <h3>Result</h3>
+
+                <p anvil-name="port_result_message"></p>
+
+                <div class="grid">
+                    <div>
+                        <small>Resolved IP</small>
+                        <p anvil-name="port_resolved_ip_text">–</p>
+                    </div>
+                    <div>
+                        <small>Status</small>
+                        <p>
+                            <mark anvil-name="port_status_text">–</mark>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </section>
+
+    <section id="tool-dns" hidden>
+        <article>
+            <form anvil-name="dns_form">
+                <label>
+                    Hostname
+                    <input
+                        anvil-name="dns_target_input"
+                        type="text"
+                        placeholder="example.com"
+                        required
+                        />
+                </label>
+
+                <button
+                    anvil-name="dns_check_button"
+                    type="button"
+                    >
+                    Run DNS check
+                </button>
+            </form>
+
+            <section
+                id="dns-result-section"
+                aria-label="DNS results"
+                hidden
+                >
+                <h3>Result</h3>
+
+                <p anvil-name="dns_summary_text"></p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Resolver</th>
+                            <th scope="col">IP(s)</th>
+                            <th scope="col">TTL</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody anvil-name="dns_results_tbody">
+                    </tbody>
+                </table>
+
+                <p anvil-name="dns_error_text"></p>
+            </section>
+        </article>
+    </section>
+</main>
+
+<footer class="container-fluid">
+    <small>
+        Built with <a href="https://picocss.com" target="_blank">Pico CSS</a>
+    </small>
+</footer>
+
+<script>
+    const root = document.documentElement;
+    const btnTheme = document.getElementById("toggle-theme");
+    const tabPort = document.getElementById("tab-port");
+    const tabDns = document.getElementById("tab-dns");
+    const toolPort = document.getElementById("tool-port");
+    const toolDns = document.getElementById("tool-dns");
+
+    const storedTheme = window.localStorage.getItem("nt_theme");
+    if (storedTheme === "light" || storedTheme === "dark") {
+        root.setAttribute("data-theme", storedTheme);
+    }
+
+    if (btnTheme) {
+        btnTheme.addEventListener("click", function () {
+            const current = root.getAttribute("data-theme") || "light";
+            const next = current === "light" ? "dark" : "light";
+            root.setAttribute("data-theme", next);
+            window.localStorage.setItem("nt_theme", next);
+        });
+    }
+
+    function showPort() {
+        toolPort.hidden = false;
+        toolDns.hidden = true;
+        tabPort.classList.remove("outline");
+        tabDns.classList.add("outline");
+    }
+
+    function showDns() {
+        toolPort.hidden = true;
+        toolDns.hidden = false;
+        tabDns.classList.remove("outline");
+        tabPort.classList.add("outline");
+    }
+
+    if (tabPort && tabDns && toolPort && toolDns) {
+        tabPort.addEventListener("click", showPort);
+        tabDns.addEventListener("click", showDns);
+    }
+</script>

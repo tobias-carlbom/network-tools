@@ -1,5 +1,12 @@
 allow_embedding: false
 name: Network Tools
+native_deps:
+  head_html: |-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="_/theme/styles.css">
 package_name: Network_Tools
 runtime_options:
   client_version: '3'
@@ -9,5 +16,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-startup: {module: Form2, type: form}
+startup: {module: MainView, type: form}
 startup_form: null
