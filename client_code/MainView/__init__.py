@@ -81,7 +81,7 @@ class MainView(MainViewTemplate):
             self._render_dns_rows([])
         else:
             self.dom_nodes["dns_summary_text"].textContent = (
-                f"Results for {data['target']}"
+                f"{data['display_target']}"
             )
             self.dom_nodes["dns_error_text"].textContent = ""
             self._render_dns_rows(data["results"])
@@ -103,22 +103,24 @@ class MainView(MainViewTemplate):
 
             ips = r.get("ips") or []
             ip_cell_text = ", ".join(ips) if ips else "–"
-            #ttl_text = str(r["ttl"]) if r["ttl"] is not None else "–"
             resolver_label = r["resolver_name"]
             country = r.get("country")
             if country:
                 resolver_label = f"{resolver_label} ({country})"
 
-            vals = [
-                resolver_label,
-                ip_cell_text,
-                #ttl_text,
-                r["status"],
-            ]
+            td_resolver = doc.createElement("td")
+            td_resolver.textContent = resolver_label
+            tr.appendChild(td_resolver)
 
-            for v in vals:
-                td = doc.createElement("td")
-                td.textContent = v
-                tr.appendChild(td)
+            td_ips = doc.createElement("td")
+            td_ips.textContent = ip_cell_text
+            tr.appendChild(td_ips)
+
+            td_status = doc.createElement("td")
+            mark = doc.createElement("mark")
+            mark.textContent = r["status"]
+            td_status.appendChild(mark)
+            tr.appendChild(td_status)
 
             tbody.appendChild(tr)
+
