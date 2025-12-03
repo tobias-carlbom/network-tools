@@ -2,6 +2,8 @@
 
 A simple network utilities web application built with Anvil.Works and styled using Pico CSS.
 
+<img src="https://github.com/user-attachments/assets/9e82d640-98c8-4fc8-83e4-76ed8d8b1003" alt="Network Tools Screenshot" width="600">
+
 ## Features
 
 - **Port Scanner** - Check if specific ports are open on a host
