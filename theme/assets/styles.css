@@ -68,6 +68,9 @@ header.container nav strong {
     color: var(--pico-primary);
 }
 
+/*
+ * set a max width of the content on large screens
+ */
 @media (min-width: 950px) {
     :root {
         --pico-font-size: 20px;
