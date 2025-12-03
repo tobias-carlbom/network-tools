@@ -103,7 +103,7 @@ class MainView(MainViewTemplate):
 
             ips = r.get("ips") or []
             ip_cell_text = ", ".join(ips) if ips else "–"
-            ttl_text = str(r["ttl"]) if r["ttl"] is not None else "–"
+            #ttl_text = str(r["ttl"]) if r["ttl"] is not None else "–"
             resolver_label = r["resolver_name"]
             country = r.get("country")
             if country:
@@ -112,7 +112,7 @@ class MainView(MainViewTemplate):
             vals = [
                 resolver_label,
                 ip_cell_text,
-                ttl_text,
+                #ttl_text,
                 r["status"],
             ]
 

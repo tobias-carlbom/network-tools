@@ -4,16 +4,16 @@ import dns.exception
 import ipaddress
 
 RESOLVERS = [
-    ("Google Public DNS (US)",        "8.8.8.8",       ""),
-    ("Google Public DNS 2 (US)",      "8.8.4.4",       ""),
+    ("Google (US)",        "8.8.8.8",       ""),
+    ("Google 2 (US)",      "8.8.4.4",       ""),
     ("Cloudflare (US)",               "1.1.1.1",       ""),
     ("Cloudflare 2 (US)",             "1.0.0.1",       ""),
     ("OpenDNS (US)",                  "208.67.222.222",""),
     ("OpenDNS 2 (US)",                "208.67.220.220",""),
     ("Quad9 (CH)",                    "9.9.9.9",       ""),
-    ("CIRA Canadian Shield (CA)",     "149.112.121.10",""),  # Anycast, CA-focused
+    ("CIRA (CA)",     "149.112.121.10",""),  # Anycast, CA-focused
     ("GleSYS", "178.73.210.182", ""),
-    ("Tele2 DNS", "217.119.160.99", ""),
+    ("Tele2 ", "217.119.160.99", ""),
     ("AliDNS (CN)",                   "223.5.5.5",     ""),
     ("Quad101 (TW)",                  "101.101.101.101",""),
 ]

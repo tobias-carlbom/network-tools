@@ -1,5 +1,10 @@
 :root[data-theme="dark"] {
-    /*
+    /* 
+     * ONLY USE BELOW IF YOU WANT TO APPLY COLOR THEME ON THE DEFAULT STYLES
+     * https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css
+     * BUT IN THIS CASE WE USE A COLORIZED THEME
+     * https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.pumpkin.min.css
+
     color-scheme: dark;
 
     --pico-background-color: #020617;
@@ -33,7 +38,14 @@
     --pico-form-element-focus-color: var(--pico-primary-focus);
     */
 
-    /*--pico-text-selection-color: rgba(247, 147, 26, 0.35);*/
+}
+
+body {
+    font-size: var(--pico-font-size) !important;
+    font-family: var(--pico-font-family) !important;
+    color: var(--pico-color) !important;
+    background-color: var(--pico-background-color) !important;
+    line-height: var(--pico-line-height) !important;
 }
 
 ::selection {
@@ -41,13 +53,21 @@
     color: var(--pico-primary-inverse);
 }
 
-header.container nav strong {
-    color: var(--pico-primary);
-}
-
 mark {
     background-color: var(--pico-primary);
     color: var(--pico-primary-inverse);
+}
+
+#loadingSpinner {
+    display: none !important;
+}
+
+.anvil-html-templated-panel > main {
+    padding-block: var(--pico-block-spacing-vertical);
+}
+
+header.container nav strong {
+    color: var(--pico-primary);
 }
 
 @media (min-width: 950px) {
@@ -61,16 +81,4 @@ mark {
     .container {
         max-width: 950px;
     }
-}
-
-body {
-    font-size: var(--pico-font-size) !important;
-    font-family: var(--pico-font-family) !important;
-    color: var(--pico-color) !important;
-    background-color: var(--pico-background-color) !important;
-    line-height: var(--pico-line-height) !important;
-}
-
-.anvil-html-templated-panel > main {
-    padding-block: var(--pico-block-spacing-vertical);
 }
