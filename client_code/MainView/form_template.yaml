@@ -1,5 +1,5 @@
 components: []
 container:
-  properties: {html: '@theme:index.html'}
+  properties: {html: '@theme:MainView.html'}
   type: HtmlTemplate
 is_package: true
