@@ -1,46 +1,97 @@
 components: []
 container:
   properties:
-    html: |
-      <main class="container">
-          <h1>Carlboms Data</h1>
+    html: |2
 
-          <p>
-              I'm Tobias Carlbom, a software developer working with companies in the automation sector.
-              I build custom software for production environments—collecting data, visualizing processes,
-              enabling remote access, and integrating systems like databases, SCADA, and ERP.
-          </p>
 
-          <h2>Examples of what I've built</h2>
-          <ul>
-              <li>Logging applications for production data.</li>
-              <li>Dashboards for operators and managers.</li>
-              <li>VPN solutions for industrial trucks and off-grid sites.</li>
-              <li>Label printing systems for production.</li>
-          </ul>
+              <nav class="container-fluid">
+                  <ul>
+                      <li>
+                          <a href="#" aria-label="Carlboms Data">
+                              <svg width="36" height="36" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="m33 17.5h-20v-5h20zm18-5h-10v5h10zm12 0h-10v5h10zm12 0h-10v5h10zm12 0h-10v5h10zm-52 48.586h-20v13h20zm25 0h-20v13h20zm25 0h-20v13h20zm-51 17h-18v2h18zm25 0h-18v2h18zm25 0h-18v2h18zm-53 4h-15v2h15zm25 0h-15v2h15zm25 0h-15v2h15zm14-77.086h-90v90h90zm-5 15h-80v-10h80zm0 70h-80v-35h80zm-30-42.5h-20v-5h20zm10-17.5h-40v-3h40zm-6 5h-28v-2h28z" />
+                              </svg>
+                          </a>
+                      </li>
+                      <li><strong>Carlboms Data Network Tools</strong></li>
+                  </ul>
+                  <ul>
+                      <li><a href="#tools" class="secondary">Tools</a></li>
+                      <li><a href="#about" class="secondary">About</a></li>
+                      <li>
+                          <a href="https://carlbomsdata.se" class="contrast" target="_blank" rel="noreferrer">
+                              Website
+                          </a>
+                      </li>
+                  </ul>
+              </nav>
 
-          <p>
-              I work across a wide range of technologies and choose what fits your situation.
-              I'm not tied to any vendor or platform, so my recommendations are based on what actually works for you.
-          </p>
+              <header>
+                  <div class="container">
+                      <h1>Network Toolbox</h1>
+                      <p class="lead">
+                          Check TCP ports and DNS propagation for your services. This tool runs checks from the server side and does not store any data.
+                      </p>
+                      <div class="actions">
+                          <a href="#tools" role="button">Open tools</a>
+                          <a href="#about" role="button" class="secondary outline">How it works</a>
+                      </div>
+                  </div>
+              </header>
 
-          <p>
-              When I take on a project, I see it through. I focus on understanding what you need
-              and will deliver a solution that works reliably.
-          </p>
+              <main>
+                  <section id="tools">
+                      <div class="container">
+                          <h2>Available tools</h2>
+                          <div class="grid-cards">
+                              <article class="card">
+                                  <h3>TCP Port Check</h3>
+                                  <p>Verify if a specific TCP port is reachable from this server, useful for testing firewalls and reverse proxies.</p>
+                                  <p><code>example.com:443</code></p>
+                                  <p>
+                                      <a href="#" role="button" class="secondary">Open TCP checker</a>
+                                  </p>
+                              </article>
+                              <article class="card">
+                                  <h3>DNS Propagation</h3>
+                                  <p>Query multiple resolvers worldwide to see how your DNS changes have propagated.</p>
+                                  <p><code>api.example.com</code></p>
+                                  <p>
+                                      <a href="#" role="button" class="secondary">Open DNS tool</a>
+                                  </p>
+                              </article>
+                              <article class="card">
+                                  <h3>HTTP Status</h3>
+                                  <p>Check HTTP status, response time, and SSL info for a given URL.</p>
+                                  <p><code>https://example.com/health</code></p>
+                                  <p>
+                                      <a href="#" role="button" class="secondary">Open HTTP check</a>
+                                  </p>
+                              </article>
+                          </div>
+                      </div>
+                  </section>
 
-          <p>
-              Based in Lund, Sweden. Available for remote work and on-site visits.
-          </p>
+                  <section id="about">
+                      <div class="container">
+                          <h2>About this toolbox</h2>
+                          <p>
+                              These tools are designed for quick diagnostics when you deploy or troubleshoot services. All checks are done from the backend and inputs are only used in memory for the current request.
+                          </p>
+                      </div>
+                  </section>
+              </main>
 
-          <h2>Contact</h2>
-          <p>
-              <a href="mailto:info@carlbomsdata.se">info@carlbomsdata.se</a>
-          </p>
-      </main>
+              <footer>
+                  <div class="container footer-meta">
+                      <span>© <span id="year"></span> Carlboms Data AB</span>
+                      <span>Built with Pico.css</span>
+                  </div>
+              </footer>
 
-      <footer class="container">
-          <small>© 2025 Carlboms Data AB</small>
-      </footer>
+              <script>
+                  document.getElementById("year").textContent = new Date().getFullYear();
+              </script>
+          </body>
   type: HtmlTemplate
 is_package: true
