@@ -3,53 +3,44 @@ container:
   properties:
     html: |
       <main class="container">
-          <section>
-              <h1>IT and automation help for small companies</h1>
-              <p>
-                  I help small companies and workshops keep their existing systems working:
-                  Windows computers, special programs, PLC/SCADA systems, networks and backups.
-                  The goal is simple: things should work every day without surprises.
-              </p>
-          </section>
+          <h1>Carlboms Data</h1>
 
-          <section>
-              <h2>What I do</h2>
-              <ul>
-                  <li>Fix and stabilise existing Windows PCs and special software.</li>
-                  <li>Keep older systems (for example Windows XP machines) running in a safe way.</li>
-                  <li>Connect PLC/SCADA and machines to logging or simple dashboards.</li>
-                  <li>Set up backup so important data is not lost.</li>
-                  <li>Set up VPN and remote access so you can get help without someone on-site.</li>
-              </ul>
-          </section>
+          <p>
+              I'm Tobias Carlbom, a software developer working with companies in the automation sector.
+              I build custom software for production environments—collecting data, visualizing processes,
+              enabling remote access, and integrating systems like databases, SCADA, and ERP.
+          </p>
 
-          <section>
-              <h2>Who I work with</h2>
-              <ul>
-                  <li>Small companies without their own IT department.</li>
-                  <li>Workshops and industry that depend on a few critical PCs or machines.</li>
-                  <li>Clinics and other businesses that use older specialist equipment.</li>
-              </ul>
-          </section>
+          <h2>Examples of what I've built</h2>
+          <ul>
+              <li>Logging applications for production data.</li>
+              <li>Dashboards for operators and managers.</li>
+              <li>VPN solutions for industrial trucks and off-grid sites.</li>
+              <li>Label printing systems for production.</li>
+          </ul>
 
-          <section id="contact">
-              <h2>Contact</h2>
-              <p>
-                  Send me a short description of your situation and what is most urgent right now.
-                  I will answer with a concrete suggestion for next steps.
-              </p>
-              <ul>
-                  <li>Email: <a href="mailto:info@carlbomsdata.se">info@carlbomsdata.se</a></li>
-                  <li>Website: <a href="https://carlbomsdata.se" target="_blank">carlbomsdata.se</a></li>
-                  <li>Based in Lund, Sweden. Remote work and on-site visits by agreement.</li>
-              </ul>
-          </section>
+          <p>
+              I work across a wide range of technologies and choose what fits your situation.
+              I'm not tied to any vendor or platform, so my recommendations are based on what actually works for you.
+          </p>
+
+          <p>
+              When I take on a project, I see it through. I focus on understanding what you need
+              and will deliver a solution that works reliably.
+          </p>
+
+          <p>
+              Based in Lund, Sweden. Available for remote work and on-site visits.
+          </p>
+
+          <h2>Contact</h2>
+          <p>
+              <a href="mailto:info@carlbomsdata.se">info@carlbomsdata.se</a>
+          </p>
       </main>
 
       <footer class="container">
-          <small>
-              © <span id="year"></span> Carlboms Data AB
-          </small>
+          <small>© 2025 Carlboms Data AB</small>
       </footer>
   type: HtmlTemplate
 is_package: true
