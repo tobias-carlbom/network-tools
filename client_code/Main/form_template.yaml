@@ -1,0 +1,55 @@
+components: []
+container:
+  properties:
+    html: |
+      <main class="container">
+          <section>
+              <h1>IT and automation help for small companies</h1>
+              <p>
+                  I help small companies and workshops keep their existing systems working:
+                  Windows computers, special programs, PLC/SCADA systems, networks and backups.
+                  The goal is simple: things should work every day without surprises.
+              </p>
+          </section>
+
+          <section>
+              <h2>What I do</h2>
+              <ul>
+                  <li>Fix and stabilise existing Windows PCs and special software.</li>
+                  <li>Keep older systems (for example Windows XP machines) running in a safe way.</li>
+                  <li>Connect PLC/SCADA and machines to logging or simple dashboards.</li>
+                  <li>Set up backup so important data is not lost.</li>
+                  <li>Set up VPN and remote access so you can get help without someone on-site.</li>
+              </ul>
+          </section>
+
+          <section>
+              <h2>Who I work with</h2>
+              <ul>
+                  <li>Small companies without their own IT department.</li>
+                  <li>Workshops and industry that depend on a few critical PCs or machines.</li>
+                  <li>Clinics and other businesses that use older specialist equipment.</li>
+              </ul>
+          </section>
+
+          <section id="contact">
+              <h2>Contact</h2>
+              <p>
+                  Send me a short description of your situation and what is most urgent right now.
+                  I will answer with a concrete suggestion for next steps.
+              </p>
+              <ul>
+                  <li>Email: <a href="mailto:info@carlbomsdata.se">info@carlbomsdata.se</a></li>
+                  <li>Website: <a href="https://carlbomsdata.se" target="_blank">carlbomsdata.se</a></li>
+                  <li>Based in Lund, Sweden. Remote work and on-site visits by agreement.</li>
+              </ul>
+          </section>
+      </main>
+
+      <footer class="container">
+          <small>
+              © <span id="year"></span> Carlboms Data AB
+          </small>
+      </footer>
+  type: HtmlTemplate
+is_package: true

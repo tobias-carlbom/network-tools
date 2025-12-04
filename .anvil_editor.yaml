@@ -2,8 +2,9 @@ unique_ids:
   assets:
     styles.css: KS5FZ4G32LHFOFJ2Z7QPTH2BKJZMV5OC
   forms:
-    MainView: '1764536685840707525444592.2932'
+    Main: '1764842119238724716311941.3647'
     Test: '1764536776268308579991938.78'
+    ToolboxView: '1764536685840707525444592.2932'
   modules: {}
   scripts: {}
   server_modules:

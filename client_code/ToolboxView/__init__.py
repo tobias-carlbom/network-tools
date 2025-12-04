@@ -1,10 +1,10 @@
-from ._anvil_designer import MainViewTemplate
+from ._anvil_designer import ToolboxViewTemplate
 from anvil import *
 import anvil.server
 import anvil.js
 
 
-class MainView(MainViewTemplate):
+class ToolboxView(ToolboxViewTemplate):
     def __init__(self, **properties):
         self.init_components(**properties)
 

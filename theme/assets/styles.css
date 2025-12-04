@@ -71,7 +71,7 @@ header.container nav strong {
 /*
  * set a max width of the content on large screens
  */
-@media (min-width: 950px) {
+@media (min-width: 768px) {
     :root {
         --pico-font-size: 20px;
         --pico-line-height: 1.5;
@@ -80,6 +80,56 @@ header.container nav strong {
         --pico-font-size-h3: 1.25rem;
     }
     .container {
-        max-width: 950px;
+        max-width: 768px;
+    }
+}
+
+
+
+
+
+
+.hero {
+    padding-block: 4rem;
+    text-align: center;
+}
+
+.hero-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.85em;
+    color: var(--pico-muted-color);
+    margin-bottom: 0.5rem;
+}
+
+.hero-lead {
+    max-width: 40rem;
+    margin-inline: auto;
+    margin-top: 1rem;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.75rem;
+}
+
+#services,
+#cases,
+#about,
+#contact {
+    margin-top: 3rem;
+}
+
+.cards {
+    display: grid;
+    gap: var(--pico-block-spacing-vertical);
+}
+
+@media (min-width: 768px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
