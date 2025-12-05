@@ -1,4 +1,5 @@
 allow_embedding: false
+metadata: {logo_img: 'asset:512x512.png'}
 name: Network Tools
 native_deps:
   head_html: |-
