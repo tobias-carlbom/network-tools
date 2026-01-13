@@ -1,7 +1,7 @@
 components: []
 container:
   properties:
-    html: |+
+    html: |
       <header class="container">
           <nav>
               <ul>
@@ -31,10 +31,7 @@ container:
                           </span>
                           <span id="icon-moon" aria-hidden="true" hidden>
                               <svg viewBox="0 0 24 24" width="20" height="20">
-                                  <path
-                                      d="M21 12.79A9 9 0 0 1 12.21 3 7 7 0 1 0 21 12.79z"
-                                      fill="currentColor"
-                                      ></path>
+                                  <path d="M21 12.79A9 9 0 0 1 12.21 3 7 7 0 1 0 21 12.79z" fill="currentColor"></path>
                               </svg>
                           </span>
                       </button>
@@ -47,7 +44,8 @@ container:
           <section>
               <h1>Network Toolbox</h1>
               <p>
-                  Check TCP ports and DNS propagation for your services to ensure they are reachable and correctly configured. This tool is privacy-focused and no data will be stored.
+                  Check TCP/UDP ports and DNS propagation for your services to ensure they are reachable and correctly configured.
+                  This tool is privacy-focused and no data will be stored.
               </p>
           </section>
 
@@ -55,26 +53,31 @@ container:
               <nav aria-label="Tool selection">
                   <ul>
                       <li>
-                          <button id="tab-port" type="button" class="primary">
-                              Port Check
+                          <button id="tab-tcp-port" type="button" class="primary">
+                              Check TCP
+                          </button>
+                      </li>
+                      <li>
+                          <button id="tab-udp-port" type="button" class="primary outline">
+                              Check UDP
                           </button>
                       </li>
                       <li>
                           <button id="tab-dns" type="button" class="primary outline">
-                              DNS Probagation
+                              DNS Propagation
                           </button>
                       </li>
                   </ul>
               </nav>
           </section>
 
-          <section id="tool-port">
+          <section id="tool-tcp">
               <article>
-                  <form anvil-name="port_form">
+                  <form anvil-name="tcp_form">
                       <label>
                           Hostname or IP
                           <input
-                              anvil-name="port_host_input"
+                              anvil-name="tcp_host_input"
                               type="text"
                               placeholder="api.example.com"
                               required
@@ -84,7 +87,7 @@ container:
                       <label>
                           Port
                           <input
-                              anvil-name="port_port_input"
+                              anvil-name="tcp_port_input"
                               type="number"
                               min="1"
                               max="65535"
@@ -93,33 +96,81 @@ container:
                               />
                       </label>
 
-                      <button
-                          anvil-name="port_check_button"
-                          type="submit"
-                          >
-                          Run port check
+                      <button anvil-name="tcp_check_button" type="submit">
+                          Run TCP port check
                       </button>
                   </form>
 
                   <section
-                      id="port-result-section"
-                      aria-label="Port check result"
+                      id="tcp-result-section"
+                      aria-label="TCP port check result"
                       hidden
                       >
                       <h3>Result</h3>
 
-                      <p anvil-name="port_result_message"></p>
+                      <p anvil-name="tcp_result_message"></p>
 
                       <div class="grid">
                           <div>
                               <small>Resolved IP</small>
-                              <p anvil-name="port_resolved_ip_text">–</p>
+                              <p anvil-name="tcp_resolved_ip_text">–</p>
                           </div>
                           <div>
                               <small>Status</small>
-                              <p>
-                                  <mark anvil-name="port_status_text">–</mark>
-                              </p>
+                              <p><mark anvil-name="tcp_status_text">–</mark></p>
+                          </div>
+                      </div>
+                  </section>
+              </article>
+          </section>
+
+          <section id="tool-udp" hidden>
+              <article>
+                  <form anvil-name="udp_form">
+                      <label>
+                          Hostname or IP
+                          <input
+                              anvil-name="udp_host_input"
+                              type="text"
+                              placeholder="api.example.com"
+                              required
+                              />
+                      </label>
+
+                      <label>
+                          Port
+                          <input
+                              anvil-name="udp_port_input"
+                              type="number"
+                              min="1"
+                              max="65535"
+                              value="443"
+                              required
+                              />
+                      </label>
+
+                      <button anvil-name="udp_check_button" type="submit">
+                          Run UDP port check
+                      </button>
+                  </form>
+
+                  <section
+                      id="udp-result-section"
+                      aria-label="UDP port check result"
+                      hidden
+                      >
+                      <h3>Result</h3>
+
+                      <p anvil-name="udp_result_message"></p>
+
+                      <div class="grid">
+                          <div>
+                              <small>Resolved IP</small>
+                              <p anvil-name="udp_resolved_ip_text">–</p>
+                          </div>
+                          <div>
+                              <small>Status</small>
+                              <p><mark anvil-name="udp_status_text">–</mark></p>
                           </div>
                       </div>
                   </section>
@@ -139,10 +190,7 @@ container:
                               />
                       </label>
 
-                      <button
-                          anvil-name="dns_check_button"
-                          type="submit"
-                          >
+                      <button anvil-name="dns_check_button" type="submit">
                           Run DNS check
                       </button>
                   </form>
@@ -164,8 +212,7 @@ container:
                                   <th scope="col">Status</th>
                               </tr>
                           </thead>
-                          <tbody anvil-name="dns_results_tbody">
-                          </tbody>
+                          <tbody anvil-name="dns_results_tbody"></tbody>
                       </table>
 
                       <p anvil-name="dns_error_text"></p>
@@ -183,23 +230,24 @@ container:
 
       <script>
           const root = document.documentElement;
+
           const btnTheme = document.getElementById("toggle-theme");
-          const tabPort = document.getElementById("tab-port");
+
+          const tabTcpPort = document.getElementById("tab-tcp-port");
+          const tabUdpPort = document.getElementById("tab-udp-port");
           const tabDns = document.getElementById("tab-dns");
-          const toolPort = document.getElementById("tool-port");
+
+          const toolTcp = document.getElementById("tool-tcp");
+          const toolUdp = document.getElementById("tool-udp");
           const toolDns = document.getElementById("tool-dns");
+
           const iconSun = document.getElementById("icon-sun");
           const iconMoon = document.getElementById("icon-moon");
 
           function applyThemeIcon(theme) {
               if (!iconSun || !iconMoon) return;
-              if (theme === "dark") {
-                  iconSun.hidden = true;
-                  iconMoon.hidden = false;
-              } else {
-                  iconSun.hidden = false;
-                  iconMoon.hidden = true;
-              }
+              iconSun.hidden = theme === "dark";
+              iconMoon.hidden = theme !== "dark";
           }
 
           const storedTheme = window.localStorage.getItem("nt_theme");
@@ -222,25 +270,38 @@ container:
               });
           }
 
-          function showPort() {
-              toolPort.hidden = false;
-              toolDns.hidden = true;
-              tabPort.classList.remove("outline");
-              tabDns.classList.add("outline");
+          function setActiveTab(active) {
+              const tabs = [tabTcpPort, tabUdpPort, tabDns].filter(Boolean);
+              for (const t of tabs) t.classList.add("outline");
+              if (active) active.classList.remove("outline");
+          }
+
+          function showOnly(sectionToShow) {
+              if (toolTcp) toolTcp.hidden = sectionToShow !== toolTcp;
+              if (toolUdp) toolUdp.hidden = sectionToShow !== toolUdp;
+              if (toolDns) toolDns.hidden = sectionToShow !== toolDns;
+          }
+
+          function showTcp() {
+              showOnly(toolTcp);
+              setActiveTab(tabTcpPort);
+          }
+
+          function showUdp() {
+              showOnly(toolUdp);
+              setActiveTab(tabUdpPort);
           }
 
           function showDns() {
-              toolPort.hidden = true;
-              toolDns.hidden = false;
-              tabDns.classList.remove("outline");
-              tabPort.classList.add("outline");
+              showOnly(toolDns);
+              setActiveTab(tabDns);
           }
 
-          if (tabPort && tabDns && toolPort && toolDns) {
-              tabPort.addEventListener("click", showPort);
-              tabDns.addEventListener("click", showDns);
-          }
+          if (tabTcpPort) tabTcpPort.addEventListener("click", showTcp);
+          if (tabUdpPort) tabUdpPort.addEventListener("click", showUdp);
+          if (tabDns) tabDns.addEventListener("click", showDns);
+
+          showTcp();
       </script>
-
   type: HtmlTemplate
 is_package: true
